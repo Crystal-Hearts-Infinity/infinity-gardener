@@ -1,9 +1,8 @@
-#@version 0.3.7
+#@version ^0.3.7
 
 """
-1) raise fund
-2) beneficiary has to work hard to complete the goal, for example, plant trees 
-3) the smart contract will release the funds based on the Carb Tokens in beneciciary's wallet balance, like 50% to 100% 
+1) Charity entities are allowed to deploy Smart Contract to raise fund based on needs from donators.
+2) Beneficiary has to work hard to complete the milestone, for example, plant trees and earn Carb tokens to claim the fund from the Smart Contract.
 """
 
 
@@ -13,20 +12,30 @@ owner:public(address)
 start_time:public(uint256)
 deadline:public(uint256) 
 beneficiary: address
+milestone: public(uint256)
+end_time:public(uint256)
 
 @external
-def __init__(_funding_goal:uint256,_beneficiary:address,time:uint256):
+def __init__(owner: address,_funding_goal:uint256, _funding_time:uint256, _beneficiary:address,_milestone:uint256,_time:uint256):
 	self.owner=msg.sender
 	self.funding_goal=_funding_goal
 	self.beneficiary=_beneficiary
 	self.start_time=block.timestamp
-	self.deadline=self.start_time+time
+	self.deadline=self.start_time+_funding_time
+	self.end_time=self.deadline+_time
+	self.milestone=_milestone
 
 
 @external
-def setup():
+def setup(_masterCopy: address, owner: address,_funding_goal:uint256, _funding_time:uint256, _beneficiary:address,_milestone:uint256,_time:uint256): #setup the contract 
 	self.owner == ZERO_ADDRESS, "owner != zero address"
-	self.owner = owner
+	self.owner=msg.sender
+	self.funding_goal=_funding_goal
+	self.beneficiary=_beneficiary
+	self.start_time=block.timestamp
+	self.deadline=self.start_time+_funding_time
+	self.end_time=self.deadline+_time
+	self.milestone=_milestone
 
 @external
 @payable
