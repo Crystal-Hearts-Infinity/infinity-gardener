@@ -11,7 +11,7 @@ from the Smart Contract.
 from vyper.interfaces import ERC20
 
 funding_goal:public(uint256)
-participants:HashMap[address,uint256]
+donors:HashMap[address,uint256]
 charity:public(address)
 start_time:public(uint256)
 deadline:public(uint256) 
@@ -53,7 +53,7 @@ def donate():
     msg_donation_period_ended = ("donation period has ended, thank you "
             "for your interest")
     assert block.timestamp <= self.deadline, msg_donation_period_ended    
-        self.participants[msg.sender] = msg.value
+        self.donors[msg.sender] = msg.value
 
 
 @external
@@ -70,9 +70,9 @@ def refund():
     msg_funding_not_achieved = ("funding goal achieved, beneficiary will be "
             "able to calim the fund after achiving milestone"0
     assert self.balance < self.funding_goal, 
-    assert self.participants[msg.sender]>0, "no fund to claim"
-    amount:uint256 = self.participants[msg.sender]
-    self.participants[msg.sender] = 0
+    assert self.donors[msg.sender]>0, "no fund to claim"
+    amount:uint256 = self.donors[msg.sender]
+    self.donors[msg.sender] = 0
     send(msg.sender,amount)
 
 @external
