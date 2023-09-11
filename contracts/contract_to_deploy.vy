@@ -14,7 +14,7 @@ funding_goal:public(uint256)
 donors:HashMap[address,uint256]
 charity:public(address)
 start_time:public(uint256)
-deadline:public(uint256) 
+donation_deadline:public(uint256) 
 beneficiary: address
 milestone: public(uint256)
 end_time:public(uint256)
@@ -28,8 +28,8 @@ def __init__(charity: address,_funding_goal:uint256, _funding_time:uint256,
     self.funding_goal =_funding_goal
     self.beneficiary =_beneficiary
     self.start_time = block.timestamp
-    self.deadline = self.start_time+_funding_time
-    self.end_time = self.deadline+_time
+    self.donation_deadline = self.start_time + _funding_time
+    self.end_time = self.donation_deadline + _time
     self.milestone =_milestone
 #    self.DAO_treasury = '0x7C074007b72c398C488526753739efFD092586e7'
 #    self.Carbon_token = '0x62997d381a5EF9fAC9ba2b22c3f10b45053DaB12'
@@ -42,8 +42,8 @@ def setup(_masterCopy: address, charity: address,_funding_goal:uint256,
     self.funding_goal =_funding_goal
     self.beneficiary =_beneficiary
     self.start_time = block.timestamp
-    self.deadline = self.start_time+_funding_time
-    self.end_time = self.deadline+_time
+    self.donation_deadline = self.start_time + _funding_time
+    self.end_time = self.donation_deadline + _time
     self.milestone = _milestone
 
 @external
@@ -52,25 +52,25 @@ def donate():
     assert block.timestamp >= self.start_time, "donation not start yet"
     msg_donation_period_ended = ("donation period has ended, thank you "
             "for your interest")
-    assert block.timestamp <= self.deadline, msg_donation_period_ended    
+    assert block.timestamp <= self.donation_deadline, msg_donation_period_ended    
         self.donors[msg.sender] = msg.value
 
 
 @external
 def reveal():
-    assert block.timestamp > self.deadline, "it is still funding time"
+    assert block.timestamp > self.donation_deadline, "it is still funding time"
     msg_funding_not_achieved = ("funding goal not achieved, call refund() "
             "to get your fund back")
     assert self.balance >= self.funding_goal, msg_funding_not_achieved
-    #return True  # if the donation collected before deadline, the fund will be send to
+    #return True  # if the donation collected before donation_deadline, the fund will be send to
     
 @external
 def refund():
-    assert block.timestamp > self.deadline, "it is still funding time"
+    assert block.timestamp > self.donation_deadline, "it is still funding time"
     msg_funding_not_achieved = ("funding goal achieved, beneficiary will be "
             "able to calim the fund after achiving milestone"0
     assert self.balance < self.funding_goal, 
-    assert self.donors[msg.sender]>0, "no fund to claim"
+    assert self.donors[msg.sender] > 0, "no fund to claim"
     amount:uint256 = self.donors[msg.sender]
     self.donors[msg.sender] = 0
     send(msg.sender,amount)
@@ -78,7 +78,7 @@ def refund():
 @external
 def claim_fund():
     token:address = Carbon_token
-    assert block.timestamp >= self.deadline, ("it is still funding time, you
+    assert block.timestamp >= self.donation_deadline, ("it is still funding time, you
                 cannot claim fund until ")
     assert block.timestamp <= self.end_time, "Claim_fund time has passed"
     assert msg.sender == self.beneficiary, ("Only the beneficiary allowed to"
