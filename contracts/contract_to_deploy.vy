@@ -17,7 +17,7 @@ start_time:public(uint256)
 donation_deadline:public(uint256) 
 beneficiary: address
 milestone: public(uint256)
-end_time:public(uint256)
+milestone_deadline:public(uint256)
 DAO_treasury: constant(address) = 0x7C074007b72c398C488526753739efFD092586e7
 Carbon_token: constant(address) = 0x62997d381a5EF9fAC9ba2b22c3f10b45053DaB12
 
@@ -29,7 +29,7 @@ def __init__(charity: address,_funding_goal:uint256, _funding_time:uint256,
     self.beneficiary =_beneficiary
     self.start_time = block.timestamp
     self.donation_deadline = self.start_time + _funding_time
-    self.end_time = self.donation_deadline + _time
+    self.milestone_deadline = self.donation_deadline + _time
     self.milestone =_milestone
 #    self.DAO_treasury = '0x7C074007b72c398C488526753739efFD092586e7'
 #    self.Carbon_token = '0x62997d381a5EF9fAC9ba2b22c3f10b45053DaB12'
@@ -43,7 +43,7 @@ def setup(_masterCopy: address, charity: address,_funding_goal:uint256,
     self.beneficiary =_beneficiary
     self.start_time = block.timestamp
     self.donation_deadline = self.start_time + _funding_time
-    self.end_time = self.donation_deadline + _time
+    self.milestone_deadline = self.donation_deadline + _time
     self.milestone = _milestone
 
 @external
@@ -80,7 +80,7 @@ def claim_fund():
     token:address = Carbon_token
     assert block.timestamp >= self.donation_deadline, ("it is still funding time, you
                 cannot claim fund until ")
-    assert block.timestamp <= self.end_time, "Claim_fund time has passed"
+    assert block.timestamp <= self.milestone_deadline, "Claim_fund time has passed"
     assert msg.sender == self.beneficiary, ("Only the beneficiary allowed to"
             "claim the fund")
     assert ERC20(token).balanceOf(self.beneficiary) >= self.milestone, ("You "
@@ -90,7 +90,7 @@ def claim_fund():
 @external
 def transfer_to_DAO():
     token:address = Carbon_token
-    assert block.timestamp > self.end_time, ("It is still early to transfer "
+    assert block.timestamp > self.milestone_deadline, ("It is still early to transfer "
                 "the fund to the DAO")
     assert msg.sender == self.charity, "Only the charity entity is allowed"
     msg_not_yet_ = "Charity entity cannot tranfer to the DAO yet"
