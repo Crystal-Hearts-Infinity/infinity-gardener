@@ -12,7 +12,7 @@ from vyper.interfaces import ERC20
 
 funding_goal:public(uint256)
 participants:HashMap[address,uint256]
-owner:public(address)
+charity:public(address)
 start_time:public(uint256)
 deadline:public(uint256) 
 beneficiary: address
@@ -22,9 +22,9 @@ DAO_treasury: constant(address) = 0x7C074007b72c398C488526753739efFD092586e7
 Carbon_token: constant(address) = 0x62997d381a5EF9fAC9ba2b22c3f10b45053DaB12
 
 
-def __init__(owner: address,_funding_goal:uint256, _funding_time:uint256, 
+def __init__(charity: address,_funding_goal:uint256, _funding_time:uint256, 
         _beneficiary:address,_milestone:uint256,_time:uint256):
-    self.owner = msg.sender
+    self.charity = msg.sender
     self.funding_goal =_funding_goal
     self.beneficiary =_beneficiary
     self.start_time = block.timestamp
@@ -35,10 +35,10 @@ def __init__(owner: address,_funding_goal:uint256, _funding_time:uint256,
 #    self.Carbon_token = '0x62997d381a5EF9fAC9ba2b22c3f10b45053DaB12'
 
 @external
-def setup(_masterCopy: address, owner: address,_funding_goal:uint256,
+def setup(_masterCopy: address, charity: address,_funding_goal:uint256,
         funding_time:uint256, _beneficiary:address,_milestone:uint256,_time:uint256): 
     """ Set up the contract """
-    self.owner = msg.sender
+    self.charity = msg.sender
     self.funding_goal =_funding_goal
     self.beneficiary =_beneficiary
     self.start_time = block.timestamp
@@ -82,8 +82,9 @@ def claim_fund():
                 cannot claim fund until ")
     assert block.timestamp <= self.end_time, "Claim_fund time has passed"
     assert msg.sender == self.beneficiary, ("Only the beneficiary allowed to"
-                "claim the fund")
-    assert ERC20(token).balanceOf(self.beneficiary) >= self.milestone, " You can't "
+            "claim the fund")
+    assert ERC20(token).balanceOf(self.beneficiary) >= self.milestone, ("You "
+            "cannot"
     selfdestruct(self.beneficiary)
 
 @external
@@ -91,8 +92,7 @@ def transfer_to_DAO():
     token:address = Carbon_token
     assert block.timestamp > self.end_time, ("It is still early to transfer "
                 "the fund to the DAO")
-    assert msg.sender == self.owner, "Only the charity entity is allowed"
+    assert msg.sender == self.charity, "Only the charity entity is allowed"
     msg_not_yet_ = "Charity entity cannot tranfer to the DAO yet"
     assert ERC20(token).balanceOf(self.beneficiary) < self.milestone, msg_not_yet
     selfdestruct(DAO_treasury)
-
