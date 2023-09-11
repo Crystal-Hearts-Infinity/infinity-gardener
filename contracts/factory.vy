@@ -4,6 +4,8 @@
 This is a Master Smart Contract to deploy other Smart Contracts for Charity Entites
 """
 
+owner:public(address)
+
 interface ContractToDeploy:
     def setup(_masterCopy: address, charity: address,_funding_goal:uint256, 
                 _funding_time:uint256, _beneficiary:address, 
@@ -21,10 +23,13 @@ event DeployLog:
     milestone: uint256 
     time: uint256  # time for beneficiary to achieve the goal
 
+
+def __init__():
+    self.owner = msg.sender
+
 @external
-def deploy(_masterCopy: address, charity: address, _funding_goal:uint256,
-                _funding_time:uint256, _beneficiary:address, _milestone:uint256, 
-                _time:uint256):
+def deploy(_masterCopy: address, owner: address,_funding_goal:uint256, _funding_time:uint256, 
+    _beneficiary:address,_milestone:uint256,_time:uint256):
     addr: address = create_forwarder_to(_masterCopy)
     ContractToDeploy(addr).setup(_masterCopy, charity, _funding_goal,_funding_time,
                 _beneficiary,_milestone,_time)

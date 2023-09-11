@@ -21,7 +21,7 @@ milestone_deadline:public(uint256)
 DAO_treasury: constant(address) = 0x7C074007b72c398C488526753739efFD092586e7
 Carbon_token: constant(address) = 0x62997d381a5EF9fAC9ba2b22c3f10b45053DaB12
 
-
+@external
 def __init__(charity: address,_funding_goal:uint256, _funding_time:uint256, 
         _beneficiary:address,_milestone:uint256,_time:uint256):
     self.charity = msg.sender
@@ -62,14 +62,15 @@ def reveal():
     msg_funding_not_achieved = ("funding goal not achieved, call refund() "
             "to get your fund back")
     assert self.balance >= self.funding_goal, msg_funding_not_achieved
-    #return True  # if the donation collected before donation_deadline, the fund will be send to
+    #return True  
+    #TODO discuss this function
     
 @external
 def refund():
     assert block.timestamp > self.donation_deadline, "it is still funding time"
     msg_funding_not_achieved = ("funding goal achieved, beneficiary will be "
-            "able to calim the fund after achiving milestone"0
-    assert self.balance < self.funding_goal, 
+            "able to calim the fund after achiving milestone")
+    assert self.balance < self.funding_goal, "no fund to claim"
     assert self.donors[msg.sender] > 0, "no fund to claim"
     amount:uint256 = self.donors[msg.sender]
     self.donors[msg.sender] = 0
@@ -78,13 +79,12 @@ def refund():
 @external
 def claim_fund():
     token:address = Carbon_token
-    assert block.timestamp >= self.donation_deadline, ("it is still funding time, you
-                cannot claim fund until ")
+    assert block.timestamp >= self.donation_deadline, ("it is still funding time, you cannot claim fund until ")
     assert block.timestamp <= self.milestone_deadline, "Claim_fund time has passed"
     assert msg.sender == self.beneficiary, ("Only the beneficiary allowed to"
             "claim the fund")
     assert ERC20(token).balanceOf(self.beneficiary) >= self.milestone, ("You "
-            "cannot"
+        "cannot")
     selfdestruct(self.beneficiary)
 
 @external
