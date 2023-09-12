@@ -19,12 +19,6 @@ Welcome to Crystal Heart Infinity Decentralized Donation Platform, a blockchain-
 
 - **Milestone-Based Fund Release:** Our platform uses smart contracts to release funds to charities based on predefined milestones. This ensures that donations are used efficiently and effectively to achieve specific goals.
 
-- **Privacy-Preserving:** We prioritize the privacy of our users. While transactions are transparent, we implement privacy-preserving techniques to protect sensitive user information.
-
-- **User-Friendly Interface:** Our user interface is designed with simplicity in mind, making it easy for both donors and charities to navigate the platform and engage with its features.
-
-- **Upcoming Features:** Stay tuned for upcoming features that will further enhance the functionality and impact of our platform. We are committed to continuous improvement.
-
 ## How It Works
 
 ![image](https://github.com/Crystal-Hearts-Infinity/infinity-gardener/assets/103866789/69a6134c-fd98-4bdd-911d-59f6a1ed7b0f)
