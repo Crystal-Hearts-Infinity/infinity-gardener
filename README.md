@@ -1,8 +1,30 @@
-# Infinity Gardener
+# Crystal Heart Infinity - Decentralized Donation Platform
 
-TODO
+## Table of Contents
 
-## Basic Use
+- [Introduction](#introduction)
+- [Features](#features)
+- [How It Works](#how-it-works)
+- [Resources](#resources)
+- [License](#license)
+
+## Introduction
+
+Welcome to Crystal Heart Infinity Decentralized Donation Platform, a blockchain-based solution designed to enhance transparency, accountability, and privacy in the world of charitable donations. Our platform leverages the power of blockchain technology to revolutionize the way donors and charities interact, ensuring that every contribution makes a meaningful impact.
+
+## Features
+
+- **Fully On-Chain Transaction Tracking:** All donation transactions are recorded on the blockchain, providing donors and charities with an immutable and transparent ledger of financial activity.
+
+- **Milestone-Based Fund Release:** Our platform uses smart contracts to release funds to charities based on predefined milestones. This ensures that donations are used efficiently and effectively to achieve specific goals.
+
+- **Privacy-Preserving:** We prioritize the privacy of our users. While transactions are transparent, we implement privacy-preserving techniques to protect sensitive user information.
+
+- **User-Friendly Interface:** Our user interface is designed with simplicity in mind, making it easy for both donors and charities to navigate the platform and engage with its features.
+
+- **Upcoming Features:** Stay tuned for upcoming features that will further enhance the functionality and impact of our platform. We are committed to continuous improvement.
+
+## How It Works
 
 This mix provides a [simple template](contracts/Token.sol) upon which you can build your own token, as well as unit tests providing 100% coverage for core ERC20 functionality.
 
