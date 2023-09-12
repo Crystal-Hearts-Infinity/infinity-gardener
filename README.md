@@ -1,4 +1,4 @@
-# Crystal Heart Infinity - Decentralized Donation Platform
+# Infinity Gardener - Decentralized Donation Platform
 
 ## Table of Contents
 
