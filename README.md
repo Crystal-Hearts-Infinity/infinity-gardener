@@ -1,18 +1,6 @@
-# token-mix
+# Infinity Gardener
 
-A bare-bones implementation of the Ethereum [ERC-20 standard](https://eips.ethereum.org/EIPS/eip-20), written in [Solidity](https://github.com/ethereum/solidity).
-
-For [Vyper](https://github.com/vyperlang/vyper), check out [`vyper-token-mix`](https://github.com/brownie-mix/vyper-token-mix).
-
-## Installation
-
-1. [Install Brownie](https://eth-brownie.readthedocs.io/en/stable/install.html), if you haven't already.
-
-2. Download the mix.
-
-    ```bash
-    brownie bake token
-    ```
+TODO
 
 ## Basic Use
 
@@ -51,16 +39,6 @@ Transaction sent: 0xb94b219148501a269020158320d543946a4e7b9fac294b17164252a13dce
 
 <Transaction '0xb94b219148501a269020158320d543946a4e7b9fac294b17164252a13dce9534'>
 ```
-
-## Testing
-
-To run the tests:
-
-```bash
-brownie test
-```
-
-The unit tests included in this mix are very generic and should work with any ERC20 compliant smart contract. To use them in your own project, all you must do is modify the deployment logic in the [`tests/conftest.py::token`](tests/conftest.py) fixture.
 
 ## Resources
 
