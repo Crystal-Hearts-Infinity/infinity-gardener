@@ -11,7 +11,7 @@
 
 ## Introduction
 
-Welcome to Crystal Heart Infinity Decentralized Donation Platform, a blockchain-based solution designed to enhance transparency, accountability, and privacy in the world of charitable donations. Our platform leverages the power of blockchain technology to revolutionize the way donors and charities interact, ensuring that every contribution makes a meaningful impact.
+Welcome to Crystal Heart Infinity Gardener Decentralized Donation Platform, a blockchain-based solution designed to enhance transparency, accountability, and privacy in the world of charitable donations. Our platform leverages the power of blockchain technology to revolutionize the way donors and charities interact, ensuring that every contribution makes a meaningful impact.
 
 ## Features
 
