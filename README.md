@@ -5,6 +5,7 @@
 - [Introduction](#introduction)
 - [Features](#features)
 - [How It Works](#how-it-works)
+- [Getting Started](#getting-started)
 - [Resources](#resources)
 - [License](#license)
 
@@ -25,6 +26,10 @@ Welcome to Crystal Heart Infinity Decentralized Donation Platform, a blockchain-
 - **Upcoming Features:** Stay tuned for upcoming features that will further enhance the functionality and impact of our platform. We are committed to continuous improvement.
 
 ## How It Works
+
+![image](https://github.com/Crystal-Hearts-Infinity/infinity-gardener/assets/103866789/69a6134c-fd98-4bdd-911d-59f6a1ed7b0f)
+
+## Getting Started
 
 This mix provides a [simple template](contracts/Token.sol) upon which you can build your own token, as well as unit tests providing 100% coverage for core ERC20 functionality.
 
